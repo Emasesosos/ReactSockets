@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const BandList = ({ data }) => {
+export const BandList = ({ data, votar }) => {
 
     const [bands, setBands] = useState(data);
 
@@ -9,8 +9,6 @@ export const BandList = ({ data }) => {
     }, [data]);
 
     const cambioNombre = (event, id) => {
-        // console.log(event.target.value);
-        // console.log(id);
         const nuevoNombre = event.target.value;
         setBands(bands => bands.map(band => {
             if(band.id === id) {
@@ -30,7 +28,10 @@ export const BandList = ({ data }) => {
             bands.map(band => (
                 <tr key={band.id}>
                     <td>
-                        <button className="btn btn-primary"> +1 </button>
+                        <button 
+                            className="btn btn-primary"
+                            onClick={ () => votar(band.id) }
+                        > +1 </button>
                     </td>
                     <td>
                         <input 
