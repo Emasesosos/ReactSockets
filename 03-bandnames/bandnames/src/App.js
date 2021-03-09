@@ -16,7 +16,7 @@ function App() {
   const [ online, setOnline ] = useState(false);
   const [bands, setBands] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { // Escucha si Socket conectado
     console.log(socket);
     setOnline(socket.connected);
   }, [socket]);
