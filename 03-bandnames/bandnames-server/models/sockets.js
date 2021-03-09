@@ -19,7 +19,12 @@ class Sockets {
             // Votar por la banda
             socket.on('votar-banda', (id) => {
                 this.bandList.increaseVotes(id);
-                this.io.socket.emit('current-bands', this.bandList.getBands());
+                this.io.emit('current-bands', this.bandList.getBands());
+            });
+            // Borrar banda
+            socket.on('borrar-banda', (id) => {
+                this.bandList.removeBand(id);
+                this.io.emit('current-bands', this.bandList.getBands());
             });
 
         });
