@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { BandAdd } from './components/BandAdd';
 import { BandList } from './components/BandList';
+import { useSocket } from './hooks/useSocket';
 
-const connectSocketServer = () => {
-  const socket = io.connect('http://localhost:8080', {
-    transports: ['websocket']
-  });
-  return socket;
-};
+// const connectSocketServer = () => {
+//   const socket = io.connect('http://localhost:8080', {
+//     transports: ['websocket']
+//   });
+//   return socket;
+// };
 
 function App() {
 
-  const [ socket ] = useState(connectSocketServer());
-  const [ online, setOnline ] = useState(false);
+  // const [ socket ] = useState(connectSocketServer());
+  // const [ online, setOnline ] = useState(false);
   const [bands, setBands] = useState([]);
 
-  useEffect(() => { // Escucha si Socket conectado
-    console.log(socket);
-    setOnline(socket.connected);
-  }, [socket]);
+  const { socket, online } = useSocket('http://localhost:8080');
 
-  useEffect(() => {
-    socket.on('connect', () => {
-      setOnline(true);
-    });
-  }, [socket]);
+  // useEffect(() => { // Escucha si Socket conectado
+  //   console.log(socket);
+  //   setOnline(socket.connected);
+  // }, [socket]);
 
-  useEffect(() => {
-    socket.on('disconnect', () => {
-      setOnline(false);
-    });
-  }, [socket]);
+  // useEffect(() => {
+  //   socket.on('connect', () => {
+  //     setOnline(true);
+  //   });
+  // }, [socket]);
+
+  // useEffect(() => {
+  //   socket.on('disconnect', () => {
+  //     setOnline(false);
+  //   });
+  // }, [socket]);
 
   useEffect(() => {
     socket.on('current-bands', (bands) => {
