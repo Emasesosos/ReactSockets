@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { TicketApp } from './TicketApp';
 
 ReactDOM.render(
-  <App />,
+  <TicketApp />,
   document.getElementById('root')
 );
 
