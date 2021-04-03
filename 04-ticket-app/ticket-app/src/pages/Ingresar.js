@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, InputNumber, Typography, Divider } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
 
@@ -17,6 +18,7 @@ const tailLayout = {
 export const Ingresar = () => {
 
     const history = useHistory();
+    useHideMenu(false);
 
     const onFinish = (values) => {
         console.log('Success:', values);

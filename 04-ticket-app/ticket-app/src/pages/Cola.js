@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col, Divider, List, Row, Tag, Typography } from 'antd';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
 
@@ -43,6 +44,8 @@ const data = [
 
 export const Cola = () => {
 
+    useHideMenu(true);
+
     return (
         <>
             <Title level={ 1 }>
@@ -73,7 +76,7 @@ export const Cola = () => {
                     <List 
                         dataSource={ data.slice(3) }
                         renderItem={ item => {
-                            const { agente, escritorio, ticketNo } = item;
+                            const { agente, ticketNo } = item;
                             return  <List.Item>
                                         <List.Item.Meta 
                                             title={`Ticket No. ${ticketNo}`}
