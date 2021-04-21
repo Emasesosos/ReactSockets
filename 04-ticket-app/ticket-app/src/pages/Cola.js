@@ -1,50 +1,65 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card, Col, Divider, List, Row, Tag, Typography } from 'antd';
 import { useHideMenu } from '../hooks/useHideMenu';
+import { SocketContext } from '../context/SocketContext';
 
 const { Title, Text } = Typography;
 
-const data = [
-    {
-        ticketNo: 33,
-        escritorio: 3,
-        agente: 'Fernando Herrera'
-    },
-    {
-        ticketNo: 34,
-        escritorio: 4,
-        agente: 'Melissa Flores'
-    },
-    {
-        ticketNo: 35,
-        escritorio: 5,
-        agente: 'Carlos Castro'
-    },
-    {
-        ticketNo: 36,
-        escritorio: 3,
-        agente: 'Fernando Herrera'
-    },
-    {
-        ticketNo: 37,
-        escritorio: 3,
-        agente: 'Fernando Herrera'
-    },
-    {
-        ticketNo: 38,
-        escritorio: 2,
-        agente: 'Melissa Flores'
-    },
-    {
-        ticketNo: 39,
-        escritorio: 5,
-        agente: 'Carlos Castro'
-    },
-];
+// const data = [
+//     {
+//         ticketNo: 33,
+//         escritorio: 3,
+//         agente: 'Fernando Herrera'
+//     },
+//     {
+//         ticketNo: 34,
+//         escritorio: 4,
+//         agente: 'Melissa Flores'
+//     },
+//     {
+//         ticketNo: 35,
+//         escritorio: 5,
+//         agente: 'Carlos Castro'
+//     },
+//     {
+//         ticketNo: 36,
+//         escritorio: 3,
+//         agente: 'Fernando Herrera'
+//     },
+//     {
+//         ticketNo: 37,
+//         escritorio: 3,
+//         agente: 'Fernando Herrera'
+//     },
+//     {
+//         ticketNo: 38,
+//         escritorio: 2,
+//         agente: 'Melissa Flores'
+//     },
+//     {
+//         ticketNo: 39,
+//         escritorio: 5,
+//         agente: 'Carlos Castro'
+//     },
+// ];
+
+
 
 export const Cola = () => {
 
     useHideMenu(true);
+    const { socket } = useContext(SocketContext);
+    const [tickets, setTickets] = useState([]);
+
+    useEffect(() => {
+        socket.on('ticket-asignado', (asignados) => {
+            console.log(asignados);
+            setTickets(asignados);
+        });
+        return () => {
+            socket.off('ticket-asignado');
+        }
+    }, [socket]);
 
     return (
         <>
@@ -54,9 +69,9 @@ export const Cola = () => {
             <Row>
                 <Col span={ 12 }>
                     <List 
-                        dataSource={ data.slice(0,3) }
+                        dataSource={ tickets.slice(0,3) }
                         renderItem={ item => {
-                            const { agente, escritorio, ticketNo } = item;
+                            const { agente, escritorio, numero } = item;
                             return  <List.Item>
                                         <Card
                                             style={{ width: 300, marginTop: 16 }}
@@ -65,7 +80,7 @@ export const Cola = () => {
                                                 <Tag>Escritorio: { escritorio }</Tag>
                                             ]}
                                         >
-                                            <Title>No. { ticketNo }</Title>
+                                            <Title>No. { numero }</Title>
                                         </Card>
                                     </List.Item>
                         }}
@@ -74,16 +89,16 @@ export const Cola = () => {
                 <Col span={ 12 }>
                     <Divider>Historial</Divider>
                     <List 
-                        dataSource={ data.slice(3) }
+                        dataSource={ tickets.slice(3) }
                         renderItem={ item => {
-                            const { agente, ticketNo } = item;
+                            const { agente, escritorio, numero } = item;
                             return  <List.Item>
                                         <List.Item.Meta 
-                                            title={`Ticket No. ${ticketNo}`}
+                                            title={`Ticket No. ${numero}`}
                                             description={
                                                 <>
                                                     <Text type="secondary">En el escritorio: </Text>
-                                                    <Tag color="magenta">{ ticketNo }</Tag>
+                                                    <Tag color="magenta">{ escritorio }</Tag>
                                                     <Text type="secondary">Agente: </Text>
                                                     <Tag color="volcano">{ agente }</Tag>
                                                 </>

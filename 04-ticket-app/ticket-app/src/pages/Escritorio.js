@@ -17,7 +17,7 @@ export const Escritorio = () => {
     const history = useHistory();
 
     const salir = () => {
-        console.log('Salir');
+        // console.log('Salir');
         localStorage.clear();
         history.replace('/ingresar');
     };
@@ -26,7 +26,7 @@ export const Escritorio = () => {
         // console.log('Siguiente Ticket');
         // console.log(usuario);
         socket.emit('siguiente-ticket-trabajar', usuario, (ticket) => {
-            console.log(ticket);
+            // console.log(ticket);
             setTicket(ticket);
         });
     };
