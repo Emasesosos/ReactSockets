@@ -23,6 +23,11 @@ class Sockets {
                 callback(nuevoTicket);
             });
 
+            socket.on('siguiente-ticket-trabajar', ({ agente, escritorio }, callback) => {
+                const suTicket = this.ticketList.asignarTicket(agente, escritorio);
+                callback(suTicket);
+            });
+
             // // Escuchar evento: mensaje-to-server
             // socket.on('mensaje-to-server', ( data ) => {
             //     console.log( data );
