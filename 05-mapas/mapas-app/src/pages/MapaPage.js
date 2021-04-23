@@ -13,7 +13,8 @@ const puntoInicial = {
 export const MapaPage = () => {
 
     const mapaDiv = useRef();
-    const [setMapa] = useState();
+    const [mapa, setMapa] = useState();
+    const [coords, setCoords] = useState(puntoInicial);
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -25,13 +26,27 @@ export const MapaPage = () => {
         setMapa(map);
     }, []);
 
+    // Cuando se mueve el mapa
+    useEffect(() => {
+        mapa?.on('move', () => {
+            const { lng, lat } = mapa.getCenter();
+            setCoords({
+                lng: lng.toFixed(4),
+                lat: lat.toFixed(4),
+                zoom: mapa.getZoom().toFixed(2)
+            });
+        });
+    }, [mapa]);
+
     return (
         <>
+            <div className="info">
+                Lng: { coords.lng } | lat: { coords.lat } | zoom: { coords.zoom }
+            </div>
             <div 
                 ref={ mapaDiv }
                 className="mapContainer"
-            >
-            </div> 
+            /> 
         </>
     );
 
