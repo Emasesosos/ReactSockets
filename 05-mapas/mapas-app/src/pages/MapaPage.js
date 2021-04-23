@@ -2,9 +2,9 @@ import React from 'react';
 import { useMapbox } from '../hooks/useMapbox';
 
 const puntoInicial = {
-    lng: 5,
-    lat: 34,
-    zoom: 2
+    lng: -122.4722,
+    lat: 37.8085,
+    zoom: 12.95
 };
 
 export const MapaPage = () => {
