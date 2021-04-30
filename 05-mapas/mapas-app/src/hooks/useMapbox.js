@@ -56,7 +56,12 @@ export const useMapbox = (puntoInicial) => {
             // Emitir los cambios del marcador
             movimientoMarcador.current.next({ id, lng, lat });
         });
-        
+
+    }, []);
+
+    // Función para actualizar la ubicación del marcador
+    const actualizarPosicion = useCallback(({ id, lng, lat }) => {
+        marcadores.current[id].setLngLat([ lng, lat ]);
     }, []);
 
     useEffect(() => {
@@ -90,6 +95,7 @@ export const useMapbox = (puntoInicial) => {
     }, [agregarMarcador]);
 
     return {
+        actualizarPosicion,
         agregarMarcador,
         coords,
         marcadores,
