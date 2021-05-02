@@ -27,6 +27,8 @@ class Server {
         this.app.use( express.static( path.resolve( __dirname, '../public' ) ) );
         // CORS
         this.app.use( cors() );
+        // Parseo del Body
+        this.app.use(express.json());
         // API ENDPOINTS
         this.app.use('/api/login', router); // Auth
     }
