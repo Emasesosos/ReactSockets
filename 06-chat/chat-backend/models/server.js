@@ -7,8 +7,6 @@ const cors     = require('cors');
 
 const Sockets  = require('./sockets');
 const { dbConnection } = require('../database/config');
-const router = require('../router/auth');
-
 class Server {
 
     constructor() {
@@ -30,7 +28,8 @@ class Server {
         // Parseo del Body
         this.app.use(express.json());
         // API ENDPOINTS
-        this.app.use('/api/login', router); // Auth
+        this.app.use('/api/login', require('../router/auth')); // Auth
+        this.app.use('/api/mensajes', require('../router/mensajes')); // Mensajes
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
