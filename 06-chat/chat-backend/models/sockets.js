@@ -1,5 +1,3 @@
-
-
 class Sockets {
 
     constructor( io ) {
@@ -13,12 +11,23 @@ class Sockets {
         // On connection
         this.io.on('connection', ( socket ) => {
 
-            // Escuchar evento: mensaje-to-server
-            socket.on('mensaje-to-server', ( data ) => {
-                console.log( data );
+            // TODO: Validar el JWT
+            // TODO: Token no válido: Desconectar
+            // TODO: Usuario activo mediante UID
+            // TODO: Emitir todos los usuarios conectados
+            // TODO: Socket join, UID
+            // TODO: Escuchar cuando cliente manda mensaje 
+            // mensaje-personal
+            // TODO: Disconnect
+            // Marcar en la BD que el usuario se desconecto
+            // TODO: Emitir todos los usuarios conectados
+
+            // // Escuchar evento: mensaje-to-server
+            // socket.on('mensaje-to-server', ( data ) => {
+            //     console.log( data );
                 
-                this.io.emit('mensaje-from-server', data );
-            });
+            //     this.io.emit('mensaje-from-server', data );
+            // });
             
         
         });
