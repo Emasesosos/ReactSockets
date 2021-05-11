@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthContext';
 
 export const LoginPage = () => {
+
+    const { login } = useContext(AuthContext);
 
     const [form, setForm] = useState({
         email: 'test1@test.com',
@@ -35,13 +38,13 @@ export const LoginPage = () => {
         })
     };
 
-    const onSubmit = (ev) => {
+    const onSubmit = async(ev) => {
         ev.preventDefault();
         (form.rememberme) 
             ? localStorage.setItem('email', form.email)
             : localStorage.removeItem('email', form.email);
-        // Llamar el backend
-
+        const { email, password } = form;
+        login(email, password); 
     };
 
     return (
@@ -64,7 +67,7 @@ export const LoginPage = () => {
                 />
                 <span className="focus-input100"></span>
             </div>
-               
+
             <div className="wrap-input100 validate-input mb-3">
                 <input 
                     className="input100" 
