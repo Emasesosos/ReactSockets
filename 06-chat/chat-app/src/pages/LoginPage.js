@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
+import Swal from 'sweetalert2';
 
 export const LoginPage = () => {
 
@@ -15,11 +16,11 @@ export const LoginPage = () => {
     useEffect(() => {
        const email = localStorage.getItem('email');
        if(email) {
-           setForm({
+           setForm( (form) => ({
             ...form,
             email,
             rememberme: true
-           });
+           }));
        }
     }, []);
 
@@ -44,7 +45,10 @@ export const LoginPage = () => {
             ? localStorage.setItem('email', form.email)
             : localStorage.removeItem('email', form.email);
         const { email, password } = form;
-        login(email, password); 
+        const ok = await login(email, password); 
+        if(!ok) {
+            Swal.fire('Error', 'Verifique el usuario y contraseña', 'error');
+        }
     };
 
     return (
