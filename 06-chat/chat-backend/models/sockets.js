@@ -23,6 +23,9 @@ class Sockets {
             // TODO: Disconnect
             // Marcar en la BD que el usuario se desconecto
             // TODO: Emitir todos los usuarios conectados
+            socket.on('disconnect', () => {
+                console.log('cliente desconectado');
+            });
 
             // // Escuchar evento: mensaje-to-server
             // socket.on('mensaje-to-server', ( data ) => {
