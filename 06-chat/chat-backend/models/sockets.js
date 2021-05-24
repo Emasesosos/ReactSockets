@@ -1,5 +1,5 @@
 const { comprobarJWT } = require("../helpers/jwt");
-const { usuarioConectado, usuarioDesconectado } = require("../controllers/sockets");
+const { usuarioConectado, usuarioDesconectado, getUsuarios } = require("../controllers/sockets");
 class Sockets {
 
     constructor( io ) {
@@ -23,7 +23,10 @@ class Sockets {
             // TODO: Validar el JWT
             // TODO: Token no válido: Desconectar
             // TODO: Usuario activo mediante UID
+
             // TODO: Emitir todos los usuarios conectados
+            this.io.emit('lista-usuarios', await getUsuarios());
+
             // TODO: Socket join, UID
             // TODO: Escuchar cuando cliente manda mensaje 
             // mensaje-personal
@@ -35,14 +38,6 @@ class Sockets {
                 await usuarioDesconectado(uid);
             });
 
-            // // Escuchar evento: mensaje-to-server
-            // socket.on('mensaje-to-server', ( data ) => {
-            //     console.log( data );
-                
-            //     this.io.emit('mensaje-from-server', data );
-            // });
-            
-        
         });
     }
 
