@@ -18,8 +18,10 @@ class Sockets {
                 console.log('socket no identificado');
                 return socket.disconnect();
             }
-            console.log('cliente conectado: ', uid);
+            // console.log('cliente conectado: ', uid);
+            // TODO: Usuario Conectado
             await usuarioConectado(uid);
+
             // TODO: Validar el JWT
             // TODO: Token no válido: Desconectar
             // TODO: Usuario activo mediante UID
@@ -32,10 +34,12 @@ class Sockets {
             // mensaje-personal
             // TODO: Disconnect
             // Marcar en la BD que el usuario se desconecto
+
             // TODO: Emitir todos los usuarios conectados
             socket.on('disconnect', async() => {
-                console.log('cliente desconectado: ', uid);
+                // console.log('cliente desconectado: ', uid);
                 await usuarioDesconectado(uid);
+                this.io.emit('lista-usuarios', await getUsuarios());
             });
 
         });
