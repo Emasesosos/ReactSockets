@@ -39,7 +39,6 @@ class Sockets {
                 const mensaje = await grabarMensaje(payload);
                 this.io.to(payload.para).emit('mensaje-personal', mensaje);
                 this.io.to(payload.de).emit('mensaje-personal', mensaje);
-                console.log(mensaje);
             });
 
             // TODO: Disconnect

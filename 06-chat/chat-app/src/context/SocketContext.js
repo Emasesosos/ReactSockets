@@ -38,13 +38,14 @@ export const SocketProvider = ({ children }) => {
     // Escuchar los mensajes personales
     useEffect(() => {
         socket?.on('mensaje-personal', (mensaje) => {
-            console.log({mensaje});
+            // Dispatch de una acción
             dispatch({
-                type: '',
-                payload: mensaje
+                type: types.nuevoMensaje,
+                payload: mensaje,
             });
+            // Mover el scroll al final
         });
-    }, [socket]);
+    }, [socket, dispatch]);
 
     return (
         <SocketContext.Provider value={{ socket, online }}>

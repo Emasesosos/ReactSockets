@@ -125,6 +125,12 @@ img {
     width: 6%;
 }
 
+.outgoing_msg_img {
+    display: inline-block;
+    float: right;
+    width: 6%;
+}
+
 .received_msg {
     display: inline-block;
     padding: 0 0 0 10px;
@@ -177,6 +183,7 @@ img {
 
 .sent_msg {
     float: right;
+    padding: 0 10px 0 0;
     width: 46%;
 }
 
