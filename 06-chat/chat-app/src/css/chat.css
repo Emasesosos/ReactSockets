@@ -178,7 +178,12 @@ img {
 
 .outgoing_msg {
     overflow: hidden;
-    margin: 26px 0 26px;
+    margin: 20px 0 20px;
+}
+
+.incoming_msg {
+    overflow: hidden;
+    margin: 20px 0 20px;
 }
 
 .sent_msg {
