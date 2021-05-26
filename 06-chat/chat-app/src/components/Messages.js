@@ -14,7 +14,10 @@ export const Messages = () => {
     return (
         <div className="mesgs">
             { /* Historia inicio */ }
-            <div className="msg_history">
+            <div 
+                id="mensajes"
+                className="msg_history"
+            >
                 {
                     mensajes.map(msg => (
                         (msg.para === auth.uid)
