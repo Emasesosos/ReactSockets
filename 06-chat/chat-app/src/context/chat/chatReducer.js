@@ -10,6 +10,13 @@ export const chatReducer = (state, action) => {
                 chatActivo: action.payload,
                 mensajes: [],
             }
+        case types.cerrarSesion:
+            return {
+                uid: '',
+                chatActivo: null,
+                usuarios: [],
+                mensajes: [],
+            }
         case types.cargarMensajes:
             return {
                 ...state,
